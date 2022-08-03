@@ -26,15 +26,25 @@
   top: 200px;
 }
 
-.day-of-week {
-  width: 80%;
-  font-size: 0.5rem;
-  font-weight: 700;
-  flex-basis: calc(100% / 10);
-  margin: 0 5px;
-  padding: 0;
-  border: 3px solid #333;
+.day-container {
+  flex-basis: calc(100% / 12);
+  display: flex;
+  flex-direction: column;
+  width: 70%;
   color: #333;
+  margin: 0 auto;
+  min-width: 61px;
+  border: 3px solid #333;
+}
+
+.day-of-week {
+  position: relative;
+  top: 5px;
+  margin: auto;
+  width: 100%;
+  font-size: 0.65rem;
+  font-weight: 600;
+  padding: 0;
   height: 40px;
   line-height: 40px;
   text-align: center;
@@ -44,13 +54,24 @@
 
 .day-of-week:hover {
   cursor: pointer;
-  background-color: #333;
+  background: rgb(116, 161, 246);
   color: #fff;
 }
 
-.day-of-week.selected {
+.day-container.selected {
   background: rgb(116, 161, 246);
   color: rgb(25, 25, 25);
+}
+
+.num-entries {
+  position: relative;
+  right: 2px;
+  bottom: 0;
+}
+
+.entry-float {
+  font-size: 0.6rem;
+  float: right;
 }
 
 .notes-area {
@@ -126,20 +147,39 @@
     top: 200px;
   }
 
-  .day-of-week {
+  .day-container {
+    flex-basis: calc(100% / 10);
+    display: flex;
+    flex-direction: column;
     width: 80%;
+    color: #333;
+    margin: auto;
+    border: 3px solid #333;
+  }
+
+  .day-of-week {
+    margin: auto;
+    width: 100%;
     font-size: 0.85rem;
     font-weight: 100;
-    flex-basis: calc(100% / 10);
-    margin: 0 10px;
     padding: 0;
-    border: 3px solid #333;
     color: #333;
     height: 60px;
     line-height: 60px;
     text-align: center;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  .num-entries {
+    position: relative;
+    right: 2px;
+    bottom: 0;
+  }
+
+  .entry-float {
+    font-size: 0.75rem;
+    float: right;
   }
 
   .update-button {

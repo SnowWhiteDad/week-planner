@@ -14,13 +14,22 @@ var $modalDelete = $modalContainer.querySelector('.modal-delete-div');
 var $selectEntry = null;
 
 // dynamically create the days of the week divs
-var $newDay = document.createElement('div');
+var $newDayContainer = null;
+var $newDay = null;
+var $numEntries = null;
 for (var i = 0; i < $daysOfTheWeek.length; i++) {
+  $newDayContainer = document.createElement('div');
   $newDay = document.createElement('div');
+  $numEntries = document.createElement('div');
   $newDay.classList.add('day-of-week');
   $newDay.setAttribute('data-day-of-week', $daysOfTheWeek[i]);
   $newDay.innerText = $daysOfTheWeek[i];
-  $daysContainer.appendChild($newDay);
+  $newDayContainer.appendChild($newDay);
+  $newDayContainer.appendChild($numEntries);
+  $numEntries.classList.add('num-entries');
+  $numEntries.innerHTML = '<span class="entry-float">' + entriesPerDay($daysOfTheWeek[i]) + '</span>';
+  $newDayContainer.classList.add('day-container');
+  $daysContainer.appendChild($newDayContainer);
 }
 // dynamically add options to select entry for Day of the Week input
 for (i = 0; i < $daysOfTheWeek.length; i++) {
@@ -70,7 +79,7 @@ $daysContainer.addEventListener('click', function (event) {
   resetDaysContainer();
   if (event.target.classList.contains('day-of-week')) {
     renderScheduleBody(event.target.innerText);
-    event.target.classList.add('selected');
+    event.target.parentElement.classList.add('selected');
     $weekDay.innerText = event.target.innerText;
   }
 });
@@ -98,12 +107,17 @@ $modalContainer.addEventListener('click', function (e) {
         scheduleData.nextEntryId++;
         var $day = newData.dayOfWeek;
         renderScheduleBody($day);
+        $viewContainer.getElementsByClassName('entry-float')[$daysOfTheWeek.indexOf($day)].innerText = entriesPerDay($day);
         $entryForm.reset();
         viewViewForm();
         $weekDay.innerText = $day;
         resetDaysContainer();
         $daysContainer.children[$daysOfTheWeek.indexOf($weekDay.innerText)].classList.add('selected');
       } else if ($modalEntry.getElementsByClassName('entry-header')[0].innerText === 'Update Entry') {
+        var oldDay = $entryForm.elements.dayOfWeek.value;
+        if (scheduleData.editing.dayOfWeek !== $entryForm.elements.dayOfWeek.value) {
+          oldDay = scheduleData.editing.dayOfWeek;
+        }
         scheduleData.editing.dayOfWeek = $entryForm.elements.dayOfWeek.value;
         scheduleData.editing.time = $entryForm.elements.entryTime.value;
         scheduleData.editing.description = $entryForm.elements.entryDesc.value;
@@ -113,6 +127,8 @@ $modalContainer.addEventListener('click', function (e) {
           scheduleData.entries[$thisnum] = scheduleData.editing;
           renderScheduleBody(scheduleData.editing.dayOfWeek);
           $weekDay.innerText = scheduleData.editing.dayOfWeek;
+          $viewContainer.getElementsByClassName('entry-float')[$daysOfTheWeek.indexOf(scheduleData.editing.dayOfWeek)].innerText = entriesPerDay(scheduleData.editing.dayOfWeek);
+          $viewContainer.getElementsByClassName('entry-float')[$daysOfTheWeek.indexOf(oldDay)].innerText = entriesPerDay(oldDay);
           scheduleData.editing = null;
           $entryForm.reset();
           viewViewForm();
@@ -128,6 +144,7 @@ $modalContainer.addEventListener('click', function (e) {
   } else if (e.target.matches('button.modal-select-yes')) {
     scheduleData.entries.splice($selectEntry.arrayIndex, 1);
     viewViewForm();
+    $viewContainer.getElementsByClassName('entry-float')[$daysOfTheWeek.indexOf($selectEntry.dayOfWeek)].innerText = entriesPerDay($selectEntry.dayOfWeek);
     renderScheduleBody($selectEntry.dayOfWeek);
     $selectEntry = null;
   } else if (e.target.matches('button.modal-select-no')) {
@@ -275,4 +292,15 @@ function resetDaysContainer() {
   for (i = 0; i < $daysContainer.children.length; i++) {
     $daysContainer.children[i].classList.remove('selected');
   }
+}
+
+// entries per day
+function entriesPerDay(day) {
+  var $entries = 0;
+  for (var i = 0; i < scheduleData.entries.length; i++) {
+    if (scheduleData.entries[i].dayOfWeek === day) {
+      $entries++;
+    }
+  }
+  return $entries;
 }
