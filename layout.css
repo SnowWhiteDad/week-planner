@@ -1,0 +1,176 @@
+.hidden {
+  display: none !important;
+}
+
+.container {
+  width: 90%;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-position {
+  position: absolute;
+  margin: auto;
+  right: 0;
+  left: 0;
+  top: 200px;
+}
+
+.day-of-week {
+  width: 80%;
+  font-size: 0.5rem;
+  font-weight: 700;
+  flex-basis: calc(100% / 10);
+  margin: 0 5px;
+  padding: 0;
+  border: 3px solid #333;
+  color: #333;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.day-of-week:hover {
+  cursor: pointer;
+  background-color: #333;
+  color: #fff;
+}
+
+.day-of-week.selected {
+  background: rgb(116, 161, 246);
+  color: rgb(25, 25, 25);
+}
+
+.notes-area {
+  border: 3px solid black;
+  margin: auto;
+  font-size: 0.8rem;
+  padding-left: 0.2rem;
+  width: 97%;
+  border-radius: 3px;
+  height: 80px;
+}
+
+.update-button {
+  width: 50px;
+  font-family: Lato, sans-serif;
+  font-weight: 100;
+  font-size: 0.6rem;
+  max-height: fit-content;
+  border: 2px solid black;
+  border-radius: 2px;
+  color: #fff;
+  line-height: 0.7rem;
+  padding: 2px 5px;
+  background: rgb(103, 121, 226);
+  box-shadow: 5px 5px 5px rgb(14, 14, 14);
+  margin-right: 8px;
+}
+
+.update-button:hover {
+  background: rgb(116, 161, 246);
+  cursor: pointer;
+  color: rgb(25, 25, 25);
+}
+
+.delete-button {
+  width: 50px;
+  font-family: Lato, sans-serif;
+  font-weight: 100;
+  font-size: 0.6rem;
+  max-height: fit-content;
+  border: 2px solid black;
+  border-radius: 2px;
+  color: #fff;
+  line-height: 0.7rem;
+  padding: 2px 5px;
+  background: red;
+  box-shadow: 5px 5px 5px rgb(14, 14, 14);
+  margin-right: 15px;
+}
+
+.delete-button:hover {
+  background: rgb(116, 161, 246);
+  cursor: pointer;
+  color: rgb(25, 25, 25);
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    max-width: 900px;
+  }
+
+  .notes-area {
+    border: 3px solid black;
+    margin: auto;
+    font-size: 1rem;
+    padding-left: 0.5rem;
+    width: 97%;
+    border-radius: 5px;
+    height: 120px;
+  }
+
+  .modal-position {
+    top: 200px;
+  }
+
+  .day-of-week {
+    width: 80%;
+    font-size: 0.85rem;
+    font-weight: 100;
+    flex-basis: calc(100% / 10);
+    margin: 0 10px;
+    padding: 0;
+    border: 3px solid #333;
+    color: #333;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .update-button {
+    width: 100px;
+    font-family: Lato, sans-serif;
+    font-weight: 100;
+    font-size: 0.85rem;
+    max-height: fit-content;
+    border: 2px solid black;
+    border-radius: 2px;
+    color: #fff;
+    line-height: 1rem;
+    padding: 3px 10px;
+    background: rgb(103, 121, 226);
+    box-shadow: 5px 5px 5px rgb(14, 14, 14);
+    margin-right: 10px;
+  }
+
+  .delete-button {
+    width: 100px;
+    font-family: Lato, sans-serif;
+    font-weight: 100;
+    font-size: 0.85rem;
+    max-height: fit-content;
+    border: 2px solid black;
+    border-radius: 2px;
+    color: #fff;
+    line-height: 1rem;
+    padding: 3px 10px;
+    background: red;
+    box-shadow: 5px 5px 5px rgb(14, 14, 14);
+    margin-right: 25px;
+  }
+}
